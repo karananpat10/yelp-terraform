@@ -3,11 +3,11 @@ resource "aws_s3_bucket" "etl_bucket" {
 }
 
 resource "aws_glue_catalog_database" "etl_db" {
-  name = "master"
+  name = "masters"
 }
 
 locals {
-  glue_role_arn = "arn:aws:iam::831696763904:role/LabRole"
+  glue_role_arn = "arn:aws:iam::108394617907:role/LabRole"
 }
 
 resource "aws_glue_job" "etl_job" {
@@ -35,4 +35,5 @@ resource "aws_glue_crawler" "etl_crawler" {
  }
 
   depends_on = [aws_glue_job.etl_job]
+
 }

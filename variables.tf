@@ -3,9 +3,9 @@ variable "region" {
   default = "us-east-1"
 }
 
-# Declare the bucket name
+# Updated: Declare a globally unique bucket name
 variable "bucket_name_prefix" {
-  default = "finalyelp2012312"
+  default = "finalyelp-karan-unique-123456"  # <-- changed
 }
 
 # Declare the Glue job name
@@ -18,8 +18,7 @@ variable "glue_crawler_name" {
   default = "yelpcrawlers13"
 }
 
-# Declare the script path in S3
+# Updated: Declare the new script path in S3
 variable "script_s3_path" {
-  default = "s3://finalyelp2012312/scripts/glue_job.py"
-
+  default = "s3://finalyelp-karan-unique-123456/scripts/glue_job.py"  # <-- changed
 }

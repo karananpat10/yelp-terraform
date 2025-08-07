@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "etl_bucket" {
 }
 
 resource "aws_glue_catalog_database" "etl_db" {
-  name = "masters"
+  name = "karanjohars"
 }
 
 locals {
@@ -37,3 +37,4 @@ resource "aws_glue_crawler" "etl_crawler" {
   depends_on = [aws_glue_job.etl_job]
 
 }
+

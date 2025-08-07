@@ -38,13 +38,13 @@ jobs:
 
       - name: Upload ETL Script to S3
         run: |
-          aws s3 cp glue_job.py s3://finalyelp2012310/scripts/glue_job.py
+          aws s3 cp glue_job.py s3://finalyelp2012312/scripts/glue_job.py
           echo "ETL script uploaded to S3."
 
       - name: Start Glue ETL Job
         id: start_etl
         run: |
-          JOB_RUN_ID=$(aws glue start-job-run --job-name yelpdata1 --query 'JobRunId' --output text)
+          JOB_RUN_ID=$(aws glue start-job-run --job-name yelpdata2 --query 'JobRunId' --output text)
           echo "ETL JobRunId: $JOB_RUN_ID"
           echo "job_run_id=$JOB_RUN_ID" >> $GITHUB_OUTPUT
 
@@ -52,7 +52,7 @@ jobs:
         run: |
           JOB_RUN_ID=${{ steps.start_etl.outputs.job_run_id }}
           while true; do
-            STATUS=$(aws glue get-job-run --job-name yelpdata1 --run-id "$JOB_RUN_ID" --query 'JobRun.JobRunState' --output text)
+            STATUS=$(aws glue get-job-run --job-name yelpdata2 --run-id "$JOB_RUN_ID" --query 'JobRun.JobRunState' --output text)
             echo "Current ETL job status: $STATUS"
             if [ "$STATUS" == "SUCCEEDED" ]; then
               echo "ETL Job completed successfully."
@@ -65,4 +65,4 @@ jobs:
           done
 
       - name: Start Glue Crawler
-        run: aws glue start-crawler --name yelpcrawlers12
+        run: aws glue start-crawler --name yelpcrawlers13
